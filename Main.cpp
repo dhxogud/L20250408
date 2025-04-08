@@ -38,33 +38,32 @@ int main()
 		cout << PlayerData->Shape << endl;
 		cout << "====================================" << endl;
 
-		char c = _getch();
+		int Key = _getch();
 		system("cls");
 
-
-		if (c == 'w' && (PlayerData->Y > 0))
+		if ((Key == 0x57 || Key == 0x77) && (PlayerData->Y > 0)) // w, W
 		{
 			PlayerData->Y -= 1;
 		}
-		else if (c == 'a' && (PlayerData->X > 0))
+		else if ((Key == 0x41 || Key == 0x61) && (PlayerData->X > 0)) // a, A
 		{
 			PlayerData->X -= 1;
 		}
-		else if (c == 's' && (PlayerData->Y < 100))
+		else if ((Key == 0x53 || Key == 0x73) && (PlayerData->Y < 100)) // s, S
 		{
 			PlayerData->Y += 1;
 		}
-		else if (c == 'd' && (PlayerData->X < 100))
+		else if ((Key == 0x44 || Key == 0x64) && (PlayerData->X < 100)) // d, D
 		{
 			PlayerData->X += 1;
 		}
-		else if (c == 13)
+		else if (Key == 13)
 		{
 			break;
 		}
 	}
 
-	delete[] PlayerData;
+	delete PlayerData;
 	PlayerData = nullptr;
 
 	return 0;
