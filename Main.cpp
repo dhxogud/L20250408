@@ -14,12 +14,14 @@ void Initialize()
 
 void ResizeDynamicArray()
 {
-	for (int i = 1; i < 11; ++i)
-	{
-		memset(DynamicArray, i, sizeof(int));
-		*((DynamicArray + 9) + i) = i * 4;
-	}
+	int* NewArray = new int[20];
 
+	for (int i = 0; i < 10; ++i)
+	{
+		*(NewArray + i) = *(DynamicArray + i);
+		NewArray[i + 10] = (i + 1) * 4;
+	}
+	DynamicArray = NewArray;
 }
 
 void PrintResult()
