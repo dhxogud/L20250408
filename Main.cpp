@@ -1,57 +1,64 @@
 #include <iostream>
+#include <conio.h>
+#include <Windows.h>
 
 using namespace std;
 
-int* DynamicArray = new int[10];
 
-void Initialize()
+struct PlayerInfo
 {
-	for (int i = 0; i < 10; ++i)
-	{
-		DynamicArray[i] = (i + 1) * 3;
-	}
-}
+	short X;
+	short Y;
+	string Shape;
+};
 
-void ResizeArray()
+void GoToXY(short X, short Y)
 {
-	int* NewArray = new int[20];
+	COORD pos = { X, Y };
+	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), pos);
 
-	for (int i = 0; i < 10; ++i)
-	{
-		*(NewArray + i) = *(DynamicArray + i);
-		NewArray[i + 10] = (i + 1) * 4;
-	}
-	delete[] DynamicArray;
-	DynamicArray = NewArray;
-
-	NewArray = nullptr;
 }
-
-void PrintResult()
-{
-	if (DynamicArray != nullptr)
-	{
-		for (int i = 0; i < 20; ++i)
-		{
-			cout << DynamicArray[i] << endl;
-		}
-	}
-	else
-	{
-		cout << "Dangling Pointer!" << endl;
-	}
-
-	delete[] DynamicArray;
-	DynamicArray = nullptr;
-	
-}
-
 
 int main()
 {
-	Initialize();
-	ResizeArray();
-	PrintResult();
+	PlayerInfo* PlayerData = new PlayerInfo(); // 구조체 1개 생성
+	PlayerData->X = 5;
+	PlayerData->Y = 5;
+	PlayerData->Shape = "P";
+
+	while (true)
+	{
+		GoToXY(PlayerData->X, PlayerData->Y);
+		cout << PlayerData->Shape << endl;
+
+		char c = _getch();
+
+		if (c == 'w')
+		{
+			PlayerData->Y -= 1;
+		}
+		else if (c == 'a')
+		{
+			PlayerData->X -= 1;
+		}
+		else if (c == 's')
+		{
+			PlayerData->Y += 1;
+		}
+		else if (c == 'd')
+		{
+			PlayerData->X += 1;
+		}
+		else
+		{
+			break;
+		}
+
+		system("cls");
+	}
+
+	delete PlayerData;
+	PlayerData = nullptr;
 
 	return 0;
 }
