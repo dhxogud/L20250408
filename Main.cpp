@@ -12,7 +12,7 @@ void Initialize()
 	}
 }
 
-void ResizeDynamicArray()
+void ResizeArray()
 {
 	int* NewArray = new int[20];
 
@@ -21,7 +21,10 @@ void ResizeDynamicArray()
 		*(NewArray + i) = *(DynamicArray + i);
 		NewArray[i + 10] = (i + 1) * 4;
 	}
+	delete[] DynamicArray;
 	DynamicArray = NewArray;
+
+	NewArray = nullptr;
 }
 
 void PrintResult()
@@ -37,6 +40,9 @@ void PrintResult()
 	{
 		cout << "Dangling Pointer!" << endl;
 	}
+
+	delete[] DynamicArray;
+	DynamicArray = nullptr;
 	
 }
 
@@ -44,7 +50,7 @@ void PrintResult()
 int main()
 {
 	Initialize();
-	ResizeDynamicArray();
+	ResizeArray();
 	PrintResult();
 
 	return 0;
