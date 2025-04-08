@@ -23,9 +23,10 @@ int main()
 	PlayerInfo* PlayerData = new PlayerInfo(); // 구조체 1개 생성
 
 
-	//PlayerInfo* PlayerData = new PlayerInfo[10]; 구조체 배열 생성
-
-	//(*(PlayerData+1)).X = 1000;	구조체 배열 포인터로 접근
+	//PlayerInfo* PlayerData = new PlayerInfo[10]; //구조체 배열 생성
+	//구조체 배열 포인터로 접근
+	//(*(PlayerData+1)).X = 1000;
+	//(PlayerData + 1)->X = 1000;
 
 	PlayerData->X = 5;
 	PlayerData->Y = 5;
