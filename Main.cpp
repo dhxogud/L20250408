@@ -16,45 +16,47 @@ void GoToXY(short X, short Y)
 {
 	COORD pos = { X, Y };
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), pos);
-
 }
 
 int main()
 {
 	PlayerInfo* PlayerData = new PlayerInfo(); // 구조체 1개 생성
+
 	PlayerData->X = 5;
 	PlayerData->Y = 5;
 	PlayerData->Shape = "P";
 
 	while (true)
 	{
+		cout << "====================================" << endl;
 		GoToXY(PlayerData->X, PlayerData->Y);
 		cout << PlayerData->Shape << endl;
+		cout << "====================================" << endl;
 
 		char c = _getch();
+		system("cls");
 
-		if (c == 'w')
+
+		if (c == 'w' && (PlayerData->Y > 0))
 		{
 			PlayerData->Y -= 1;
 		}
-		else if (c == 'a')
+		else if (c == 'a' && (PlayerData->X > 0))
 		{
 			PlayerData->X -= 1;
 		}
-		else if (c == 's')
+		else if (c == 's' && (PlayerData->Y < 100))
 		{
 			PlayerData->Y += 1;
 		}
-		else if (c == 'd')
+		else if (c == 'd' && (PlayerData->X < 100))
 		{
 			PlayerData->X += 1;
 		}
-		else
+		else if (c == 13)
 		{
 			break;
 		}
-
-		system("cls");
 	}
 
 	delete PlayerData;
